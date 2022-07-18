@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/screens/home/home_page.dart';
-import 'package:ecommerce_app/screens/shopcard/shop_card_page.dart';
+import 'package:ecommerce_app/screens/settings/setting_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -15,8 +16,7 @@ class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
   List<Widget> pages = const [
     HomePage(),
-    ShopCardPage(),
-    HomePage(),
+    SettingPage(),
   ];
 
   @override
@@ -26,6 +26,7 @@ class _BottomBarState extends State<BottomBar> {
       appBar: _appbar,
       body: Center(child: pages[_currentIndex]),
       bottomNavigationBar: NavigationBar(
+        height: 60,
         animationDuration: const Duration(seconds: 1),
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: _currentIndex,
@@ -41,14 +42,9 @@ class _BottomBarState extends State<BottomBar> {
             selectedIcon: Icon(Icons.home),
           ),
           NavigationDestination(
-            icon: Icon(Icons.shop_outlined),
-            label: 'My Card',
-            selectedIcon: Icon(Icons.shop),
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
+            icon: Icon(CupertinoIcons.settings),
             label: 'Settings',
-            selectedIcon: Icon(Icons.settings),
+            selectedIcon: Icon(CupertinoIcons.settings_solid),
           ),
         ],
       ),
@@ -60,17 +56,9 @@ class _BottomBarState extends State<BottomBar> {
       backgroundColor: Colors.white,
       elevation: 0.0,
       centerTitle: true,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Color(0xFF545D68),
-        ),
-        onPressed: () {},
-      ),
       title: const Text(
-        'Daw Kyee Rone',
+        'ECOMMERCE',
         style: TextStyle(
-          fontFamily: 'Varela',
           fontSize: 20.0,
           color: Color(0xFF545D68),
         ),
@@ -81,7 +69,9 @@ class _BottomBarState extends State<BottomBar> {
             Icons.shopping_bag_outlined,
             color: Color(0xFF545D68),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, 'shopcard');
+          },
         ),
       ],
     );

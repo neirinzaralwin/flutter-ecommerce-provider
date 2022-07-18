@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/product.dart';
@@ -24,9 +23,9 @@ class ItemCard extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             elevation: 5,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(20),
             ),
-            color: secondaryColor1,
+            color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

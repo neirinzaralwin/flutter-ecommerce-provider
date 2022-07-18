@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/providers/bag_list.dart';
-import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:state_notifier/state_notifier.dart';
 
