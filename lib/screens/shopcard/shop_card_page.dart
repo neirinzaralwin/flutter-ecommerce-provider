@@ -18,13 +18,16 @@ class _ShopCardPageState extends State<ShopCardPage> {
     return Container(
       alignment: direction == 0 ? Alignment.centerLeft : Alignment.centerRight,
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.5),
+        color: Colors.red,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Icon(
-        Icons.delete,
-        size: 30.0,
-        color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(
+          Icons.delete,
+          size: 30.0,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -40,38 +43,53 @@ class _ShopCardPageState extends State<ShopCardPage> {
         appBar: _appbar,
         body: Stack(
           children: [
+            // -> Bottom Bar
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 15.0, horizontal: 15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Total: ',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Total: ',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '${context.watch<TotalPriceState>().total}',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryColor),
+                            ),
+                            Text(
+                              ' MMK',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryColor),
+                            ),
+                          ],
                         ),
-                        Text(
-                          '${context.watch<TotalPriceState>().total}',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor),
+                        FloatingActionButton.extended(
+                          label: Text('Check Out'), // <-- Text
+                          backgroundColor: primaryColor,
+                          icon: Icon(
+                            Icons.shopping_bag_outlined,
+                            size: 24.0,
+                          ),
+                          onPressed: () {},
                         ),
-                        Text(
-                          ' MMK',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor),
-                        )
                       ],
                     ),
                   ],
@@ -79,6 +97,7 @@ class _ShopCardPageState extends State<ShopCardPage> {
               ),
             ),
             ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: products.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
@@ -153,16 +172,14 @@ class _ShopCardPageState extends State<ShopCardPage> {
         ),
       ),
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            CupertinoIcons.delete_simple,
-            color: Colors.red,
-            size: 18,
-          ),
-          onPressed: () {
-            context.read<ShopCardList>().deleteAll();
-          },
-        ),
+        TextButton(
+            onPressed: () {
+              context.read<ShopCardList>().deleteAll();
+            },
+            child: Text(
+              'Delete',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ))
       ],
     );
   }

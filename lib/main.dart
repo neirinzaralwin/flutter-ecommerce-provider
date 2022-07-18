@@ -8,6 +8,7 @@ import 'package:ecommerce_app/providers/bag_list.dart';
 import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/providers/total_price.dart';
 import 'package:ecommerce_app/screens/bottom_bar.dart';
+import 'package:ecommerce_app/screens/checkout/check_out_page.dart';
 import 'package:ecommerce_app/screens/loading/loading_page.dart';
 import 'package:ecommerce_app/screens/login/login_page.dart';
 import 'package:ecommerce_app/screens/login/phone_page.dart';
@@ -17,12 +18,14 @@ import 'package:ecommerce_app/screens/shopcard/shop_card_page.dart';
 import 'package:ecommerce_app/utils/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -88,9 +91,9 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce',
         theme: ThemeData(
-          primaryColor: primaryColor,
-          primarySwatch: Colors.brown,
-        ),
+            primaryColor: primaryColor,
+            primarySwatch: Colors.brown,
+            scaffoldBackgroundColor: scaffoldBackgroundColor),
         home: isLoading
             ? LoadingPage()
             : (permission == 'Granted')
@@ -102,6 +105,7 @@ class _MyAppState extends State<MyApp> {
           'login': (context) => LoginPage(),
           'settings': (context) => SettingPage(),
           'phone': (context) => PhonePage(),
+          'checkout': (context) => CheckOutPage(),
         },
       ),
     );

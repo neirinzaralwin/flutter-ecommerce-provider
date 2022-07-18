@@ -175,7 +175,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10.0),
-                                child: component2("Get OTP", 3.0, () {}),
+                                child: component2("Continue as guest", 3.0, () {
+                                  Navigator.pushReplacementNamed(
+                                      context, 'bottombar');
+                                }),
                               ),
                               SizedBox(
                                 height: size.width / 1.2,
@@ -267,7 +270,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             child: Text(
               string,
               style: TextStyle(
-                  color: Colors.black.withOpacity(.5),
+                  color: Colors.black.withOpacity(.7),
                   fontWeight: FontWeight.bold),
             ),
           ),

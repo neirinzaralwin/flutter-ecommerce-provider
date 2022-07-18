@@ -40,14 +40,15 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) => ItemCard(
                   product: products[index],
                   press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailPage(
-                          product: products[index],
-                        ),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => DetailPage(
+                    //       product: products[index],
+                    //     ),
+                    //   ),
+                    // );
+                    Navigator.pushNamed(context, 'checkout');
                   }),
             ),
           ),

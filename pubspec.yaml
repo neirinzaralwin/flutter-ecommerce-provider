@@ -62,6 +62,7 @@ flutter:
     - assets/images/product3.jpeg
     - assets/images/product4.jpeg
     - assets/images/product5.jpeg
+    - assets/images/test.png
     - assets/icons/facebook.png
     - assets/icons/google.png
     - assets/icons/phone.png
