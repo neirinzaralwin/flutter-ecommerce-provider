@@ -29,7 +29,9 @@ class ShopCardList extends StateNotifier<ShopCardListState> {
 
   void addToCard(Product product, int amount) {
     for (int i = 0; i < amount; i++) {
-      state = state.copyWith(productList: [...state.productList, product]);
+      state = state.copyWith(
+          productList: [...state.productList, product]
+            ..sort(((a, b) => a.title.compareTo(b.title))));
     }
   }
 
@@ -51,6 +53,7 @@ class ShopCardList extends StateNotifier<ShopCardListState> {
     List<Product> detainedList =
         state.productList.where((Product p) => p.id != product.id).toList();
     final newList = targetList + detainedList;
+    newList..sort(((a, b) => a.title.compareTo(b.title)));
 
     state = state.copyWith(productList: newList);
   }

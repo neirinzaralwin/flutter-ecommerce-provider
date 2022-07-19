@@ -1,7 +1,11 @@
+import 'package:badges/badges.dart';
+import 'package:ecommerce_app/providers/bag_list.dart';
+import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/screens/home/home_page.dart';
 import 'package:ecommerce_app/screens/settings/setting_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -21,9 +25,47 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final products = context.watch<ShopCardListState>().productList;
+
     return Scaffold(
       key: _bottombarkey,
-      appBar: _appbar,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        centerTitle: true,
+        title: const Text(
+          'ECOMMERCE',
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Color(0xFF545D68),
+          ),
+        ),
+        actions: <Widget>[
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'shopcard');
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Badge(
+                position: BadgePosition.topEnd(top: 5, end: -10),
+                showBadge: (products.length > 0) ? true : false,
+                badgeContent: Text(
+                  '${products.length}',
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+                child: Icon(
+                  Icons.shopping_bag_outlined,
+                  color: Color(0xFF545D68),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
       body: Center(child: pages[_currentIndex]),
       bottomNavigationBar: NavigationBar(
         height: 60,
@@ -48,32 +90,6 @@ class _BottomBarState extends State<BottomBar> {
           ),
         ],
       ),
-    );
-  }
-
-  get _appbar {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      centerTitle: true,
-      title: const Text(
-        'ECOMMERCE',
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Color(0xFF545D68),
-        ),
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.shopping_bag_outlined,
-            color: Color(0xFF545D68),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'shopcard');
-          },
-        ),
-      ],
     );
   }
 }

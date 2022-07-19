@@ -1,15 +1,15 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-showAlertDialog(BuildContext context, String title, String content) {
+showAlertDialog(BuildContext context, String title, String content,
+    VoidCallback _callBackFunction) {
   // Create button
   Widget okButton = FlatButton(
+    color: secondaryColor1,
     child: Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-      Navigator.pushNamed(context, 'shopcard');
-    },
+    onPressed: _callBackFunction,
   );
 
   // Create AlertDialog

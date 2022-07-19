@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/models/notification_permission.dart';
 import 'package:ecommerce_app/models/storage_permission.dart';
@@ -8,7 +7,6 @@ import 'package:ecommerce_app/providers/bag_list.dart';
 import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/providers/total_price.dart';
 import 'package:ecommerce_app/screens/bottom_bar.dart';
-import 'package:ecommerce_app/screens/checkout/check_out_page.dart';
 import 'package:ecommerce_app/screens/loading/loading_page.dart';
 import 'package:ecommerce_app/screens/login/login_page.dart';
 import 'package:ecommerce_app/screens/login/phone_page.dart';
@@ -105,7 +103,6 @@ class _MyAppState extends State<MyApp> {
           'login': (context) => LoginPage(),
           'settings': (context) => SettingPage(),
           'phone': (context) => PhonePage(),
-          'checkout': (context) => CheckOutPage(),
         },
       ),
     );

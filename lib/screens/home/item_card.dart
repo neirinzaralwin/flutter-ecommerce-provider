@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/product.dart';
@@ -51,6 +52,7 @@ class ItemCard extends StatelessWidget {
                         '$price Ks',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: primaryColor,
                         ),
                       )),
                     ],

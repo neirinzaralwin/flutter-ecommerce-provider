@@ -83,4 +83,5 @@ List<Product> products = [
   ),
 ];
 
-String dummyText = "Description...";
+String dummyText =
+    "When starting to craft your perfect product description, it’s important to determine the best format to use.Since some online shoppers only scan text on websites, it might be helpful to use bullet points that cover the most important product details. Bullet points should generally be used for specs (like dimensions) or short phrases (like features) so they are quick and easy to read.Unfortunately, bullet points aren’t always the best way to tell a product’s story and convince target customers that they are looking at a great deal. They can look cold and clinical on a page instead of engaging the shopper’s emotions or imagination.To avoid those common mistakes and pain points, use prose instead.By writing a paragraph (three or more sentences) or two about the product, retailers can set the scene and help the shopper realize why their life up to this point has been incomplete without it. It may seem daunting, but after some practice, it will become second nature and even (gasp!) fun.";
