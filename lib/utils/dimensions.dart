@@ -8,6 +8,6 @@ class Dimensions {
 
   // Detail Page
   static double iconSize16 = screenHeight / 52.75;
-  static double detailPageImageHeight = screenHeight / 2.41;
+  static double detailPageImageHeight = screenHeight / 1.7;
   static double detailPageBottomHeight = screenHeight / 8.03;
 }

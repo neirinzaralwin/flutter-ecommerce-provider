@@ -22,7 +22,7 @@ class ItemCard extends StatelessWidget {
           onTap: press,
           child: Card(
             clipBehavior: Clip.antiAlias,
-            elevation: 5,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),

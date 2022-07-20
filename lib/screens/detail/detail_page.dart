@@ -70,10 +70,10 @@ class _DetailPageState extends State<DetailPage> {
                 ],
               ),
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(80),
+                preferredSize: Size.fromHeight(90),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20),
@@ -81,7 +81,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   width: double.maxFinite,
                   padding: EdgeInsets.only(
-                    top: 5,
+                    top: 20,
                     bottom: 10,
                     left: 20,
                     right: 20,
@@ -90,7 +90,7 @@ class _DetailPageState extends State<DetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Product Name',
+                          '${widget.product.title}',
                           style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,

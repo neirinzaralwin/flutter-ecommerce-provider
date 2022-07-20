@@ -2,6 +2,7 @@ import 'package:ecommerce_app/providers/bag_list.dart';
 import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/providers/total_price.dart';
 import 'package:ecommerce_app/utils/colors.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,109 +42,112 @@ class _ShopCardPageState extends State<ShopCardPage> {
     return SafeArea(
       child: Scaffold(
         appBar: _appbar,
-        body: Stack(
-          children: [
-            // -> Bottom Bar
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 15.0, horizontal: 15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Total: ',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '${context.watch<TotalPriceState>().total}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor),
-                            ),
-                            Text(
-                              ' MMK',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor),
-                            ),
-                          ],
-                        ),
-                        FloatingActionButton.extended(
-                          label: Text('Check Out'), // <-- Text
-                          backgroundColor: primaryColor,
-                          icon: Icon(
-                            Icons.shopping_bag_outlined,
-                            size: 24.0,
+        body: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemCount: products.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+              child: Dismissible(
+                key: ValueKey(products[index].id),
+                background: showBackground(0),
+                secondaryBackground: showBackground(1),
+                onDismissed: (_) {
+                  context.read<ShopCardList>().removeFromCard(products[index]);
+                },
+                confirmDismiss: (_) {
+                  return showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Are you sure?'),
+                        content: Text('Do you really want to delete?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: Text('NO'),
                           ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: products.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 16.0),
-                  child: Dismissible(
-                    key: ValueKey(products[index].id),
-                    background: showBackground(0),
-                    secondaryBackground: showBackground(1),
-                    onDismissed: (_) {
-                      context
-                          .read<ShopCardList>()
-                          .removeFromCard(products[index]);
-                    },
-                    confirmDismiss: (_) {
-                      return showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('Are you sure?'),
-                            content: Text('Do you really want to delete?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, false),
-                                child: Text('NO'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, true),
-                                child: Text('YES'),
-                              ),
-                            ],
-                          );
-                        },
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            child: Text('YES'),
+                          ),
+                        ],
                       );
                     },
-                    child: _customList(
-                        products: products,
-                        index: index,
-                        amount: amount,
-                        subTotal: subTotal),
-                  ),
-                );
-              },
+                  );
+                },
+                child: _customList(
+                    products: products,
+                    index: index,
+                    amount: amount,
+                    subTotal: subTotal),
+              ),
+            );
+          },
+        ),
+        bottomNavigationBar: Container(
+          height: Dimensions.detailPageBottomHeight,
+          padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+          decoration: BoxDecoration(
+              color: scaffoldBackgroundColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            // Counter
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Total: ',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${context.watch<TotalPriceState>().total}',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor),
+                ),
+                Text(
+                  ' MMK',
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor),
+                ),
+              ],
             ),
-          ],
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, 'checkout');
+              },
+              child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: primaryColor),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 24.0,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Check Out',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )),
+            ),
+          ]),
         ),
       ),
     );
@@ -151,7 +155,7 @@ class _ShopCardPageState extends State<ShopCardPage> {
 
   get _appbar {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: scaffoldBackgroundColor,
       elevation: 0.0,
       centerTitle: true,
       leading: IconButton(
@@ -262,46 +266,53 @@ class _customList extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context
-                              .read<ShopCardList>()
-                              .addToCard(products[index], 1);
-                        },
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.black38,
-                          size: 18,
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20.0, vertical: 6),
+                  decoration: BoxDecoration(
+                      color: scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            context
+                                .read<ShopCardList>()
+                                .addToCard(products[index], 1);
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.black38,
+                            size: 18,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          '${amount[index]}',
-                          style: TextStyle(
-                              color: primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            '${amount[index]}',
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          context
-                              .read<ShopCardList>()
-                              .decreaseValue(products[index]);
-                        },
-                        child: Icon(
-                          Icons.remove,
-                          color: Colors.red,
-                          size: 18,
+                        InkWell(
+                          onTap: () {
+                            context
+                                .read<ShopCardList>()
+                                .decreaseValue(products[index]);
+                          },
+                          child: Icon(
+                            Icons.remove,
+                            color: Colors.red,
+                            size: 18,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

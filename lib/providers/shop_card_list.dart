@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/providers/total_price.dart';
 import 'package:equatable/equatable.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:ecommerce_app/models/product.dart';

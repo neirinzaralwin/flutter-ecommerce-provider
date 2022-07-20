@@ -3,6 +3,7 @@ import 'package:ecommerce_app/providers/bag_list.dart';
 import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/screens/home/home_page.dart';
 import 'package:ecommerce_app/screens/settings/setting_page.dart';
+import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       key: _bottombarkey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: scaffoldBackgroundColor,
         elevation: 0.0,
         centerTitle: true,
         title: const Text(
@@ -69,6 +70,7 @@ class _BottomBarState extends State<BottomBar> {
       body: Center(child: pages[_currentIndex]),
       bottomNavigationBar: NavigationBar(
         height: 60,
+        backgroundColor: scaffoldBackgroundColor,
         animationDuration: const Duration(seconds: 1),
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: _currentIndex,

@@ -64,6 +64,8 @@ flutter:
     - assets/images/product4.jpeg
     - assets/images/product5.jpeg
     - assets/images/test.png
+    - assets/icons/kbzpay.png
+    - assets/icons/wavepay.png
     - assets/icons/facebook.png
     - assets/icons/google.png
     - assets/icons/phone.png

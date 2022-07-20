@@ -7,6 +7,7 @@ import 'package:ecommerce_app/providers/bag_list.dart';
 import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/providers/total_price.dart';
 import 'package:ecommerce_app/screens/bottom_bar.dart';
+import 'package:ecommerce_app/screens/checkout/check_out_page.dart';
 import 'package:ecommerce_app/screens/loading/loading_page.dart';
 import 'package:ecommerce_app/screens/login/login_page.dart';
 import 'package:ecommerce_app/screens/login/phone_page.dart';
@@ -41,6 +42,20 @@ class _MyAppState extends State<MyApp> {
   var permission;
   bool isLoading = true;
   late Timer _timer;
+
+  static Map<int, Color> color = {
+    50: Color.fromRGBO(135, 128, 94, .1),
+    100: Color.fromRGBO(135, 128, 94, .2),
+    200: Color.fromRGBO(135, 128, 94, .3),
+    300: Color.fromRGBO(135, 128, 94, .4),
+    400: Color.fromRGBO(135, 128, 94, .5),
+    500: Color.fromRGBO(135, 128, 94, .6),
+    600: Color.fromRGBO(135, 128, 94, .7),
+    700: Color.fromRGBO(135, 128, 94, .8),
+    800: Color.fromRGBO(135, 128, 94, .9),
+    900: Color.fromRGBO(135, 128, 94, 1),
+  };
+  MaterialColor primecolor = MaterialColor(0xFF87805E, color);
 
   @override
   void initState() {
@@ -90,7 +105,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Ecommerce',
         theme: ThemeData(
             primaryColor: primaryColor,
-            primarySwatch: Colors.brown,
+            primarySwatch: primecolor,
             scaffoldBackgroundColor: scaffoldBackgroundColor),
         home: isLoading
             ? LoadingPage()
@@ -103,6 +118,7 @@ class _MyAppState extends State<MyApp> {
           'login': (context) => LoginPage(),
           'settings': (context) => SettingPage(),
           'phone': (context) => PhonePage(),
+          'checkout': (context) => CheckOutPage(),
         },
       ),
     );

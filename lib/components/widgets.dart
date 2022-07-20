@@ -30,6 +30,18 @@ Widget SmallText(String text) {
   );
 }
 
+Widget SubTitleText(String text) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: Colors.black.withOpacity(0.7),
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+      height: 1.8,
+    ),
+  );
+}
+
 Widget BigText(String text) {
   return Text(
     text,
