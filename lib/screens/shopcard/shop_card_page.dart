@@ -5,6 +5,7 @@ import 'package:ecommerce_app/utils/colors.dart';
 import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ShopCardPage extends StatefulWidget {
@@ -38,6 +39,7 @@ class _ShopCardPageState extends State<ShopCardPage> {
     final products = context.watch<BagListState>().myBag.keys.toList();
     final amount = context.watch<BagListState>().myBag.values.toList();
     final subTotal = context.watch<BagListState>().subTotal.values.toList();
+    int totalPrice = context.watch<TotalPriceState>().total;
 
     return SafeArea(
       child: Scaffold(
@@ -122,25 +124,32 @@ class _ShopCardPageState extends State<ShopCardPage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, 'checkout');
+                if (totalPrice != 0) {
+                  Get.toNamed('/checkout/${totalPrice.toString()}');
+                }
               },
               child: Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: primaryColor),
+                      color: (totalPrice == 0)
+                          ? primaryColor.withOpacity(0.7)
+                          : primaryColor),
                   child: Row(
                     children: [
                       Icon(
                         Icons.shopping_bag_outlined,
                         size: 24.0,
-                        color: Colors.white,
+                        color:
+                            (totalPrice == 0) ? Colors.white70 : Colors.white,
                       ),
                       SizedBox(width: 10),
                       Text(
                         'Check Out',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: (totalPrice == 0)
+                                ? Colors.white70
+                                : Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),

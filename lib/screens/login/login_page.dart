@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -169,15 +170,15 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     const EdgeInsets.symmetric(vertical: 10.0),
                                 child: component1("assets/icons/phone.png",
                                     "Continue with phone number", () {
-                                  Navigator.pushNamed(context, 'phone');
+                                  // Navigator.pushNamed(context, 'phone');
+                                  Get.toNamed('/login/phone');
                                 }),
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10.0),
                                 child: component2("Continue as guest", 3.0, () {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'bottombar');
+                                  Get.offAllNamed('/bottombar');
                                 }),
                               ),
                               SizedBox(

@@ -7,6 +7,7 @@ import 'package:ecommerce_app/utils/colors.dart';
 import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/models/product.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _DetailPageState extends State<DetailPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Get.back(),
                       child: AppIcon(
                         icon: Icons.arrow_back_ios,
                         backgroundColor: Colors.white,
@@ -42,7 +43,7 @@ class _DetailPageState extends State<DetailPage> {
                       )),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, 'shopcard');
+                      Get.toNamed('/shopcard');
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -220,7 +221,7 @@ class _DetailPageState extends State<DetailPage> {
               } else {
                 showAlertDialog(context, "Alert",
                     "You must have at least one item to add to shop cart", () {
-                  Navigator.pop(context);
+                  Get.back();
                 });
               }
               setState(() {

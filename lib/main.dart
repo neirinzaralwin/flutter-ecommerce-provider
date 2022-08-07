@@ -19,6 +19,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -100,26 +101,47 @@ class _MyAppState extends State<MyApp> {
         StateNotifierProvider<AllPermission, AllPermissionState>(
             create: (context) => AllPermission()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce',
         theme: ThemeData(
             primaryColor: primaryColor,
             primarySwatch: primecolor,
             scaffoldBackgroundColor: scaffoldBackgroundColor),
-        home: isLoading
-            ? LoadingPage()
-            : (permission == 'Granted')
-                ? BottomBar()
-                : PermissionPage(),
-        routes: {
-          'bottombar': (context) => BottomBar(),
-          'shopcard': (context) => ShopCardPage(),
-          'login': (context) => LoginPage(),
-          'settings': (context) => SettingPage(),
-          'phone': (context) => PhonePage(),
-          'checkout': (context) => CheckOutPage(),
-        },
+        // home: isLoading
+        //     ? LoadingPage()
+        //     : (permission == 'Granted')
+        //         ? BottomBar()
+        //         : PermissionPage(),
+        // routes: {
+        //   'bottombar': (context) => BottomBar(),
+        //   'shopcard': (context) => ShopCardPage(),
+        //   'login': (context) => LoginPage(),
+        //   'settings': (context) => SettingPage(),
+        //   'phone': (context) => PhonePage(),
+        //   'checkout': (context) => CheckOutPage(),
+        // },
+
+        initialRoute: '/',
+        getPages: [
+          // GetPage(
+          //     name: '/',
+          //     page: () {
+          //       if (isLoading) {
+          //         return LoadingPage();
+          //       } else if (permission == 'Granted') {
+          //         return BottomBar();
+          //       } else {
+          //         return PermissionPage();
+          //       }
+          //     }),
+          GetPage(name: '/', page: () => PermissionPage()),
+          GetPage(name: '/login', page: () => LoginPage()),
+          GetPage(name: '/login/phone', page: () => PhonePage()),
+          GetPage(name: '/bottombar', page: () => BottomBar()),
+          GetPage(name: '/shopcard', page: () => ShopCardPage()),
+          GetPage(name: '/checkout/:totalPrice', page: () => CheckOutPage()),
+        ],
       ),
     );
   }

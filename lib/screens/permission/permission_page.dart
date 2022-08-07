@@ -3,6 +3,7 @@ import 'package:ecommerce_app/models/storage_permission.dart';
 import 'package:ecommerce_app/providers/all_permissions.dart';
 import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -170,7 +171,8 @@ class _PermissionPageState extends State<PermissionPage>
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.setString('permission', 'Granted');
-                      Navigator.pushReplacementNamed(context, 'login');
+                      // Navigator.pushReplacementNamed(context, 'login');
+                      Get.offAllNamed('/login');
                     }
                   : null,
               child: const Text(
