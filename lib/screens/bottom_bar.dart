@@ -6,6 +6,7 @@ import 'package:ecommerce_app/screens/settings/setting_page.dart';
 import 'package:ecommerce_app/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
@@ -44,7 +45,7 @@ class _BottomBarState extends State<BottomBar> {
         actions: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'shopcard');
+              Get.toNamed('/shopcard');
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 20.0),

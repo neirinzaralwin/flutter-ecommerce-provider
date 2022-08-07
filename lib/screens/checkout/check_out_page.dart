@@ -1,10 +1,8 @@
-import 'package:badges/badges.dart';
 import 'package:ecommerce_app/components/widgets.dart';
-import 'package:ecommerce_app/providers/shop_card_list.dart';
 import 'package:ecommerce_app/utils/colors.dart';
 import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class CheckOutPage extends StatefulWidget {
   const CheckOutPage({Key? key}) : super(key: key);
@@ -23,7 +21,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   @override
   Widget build(BuildContext context) {
-    final products = context.watch<ShopCardListState>().productList;
+    // final products = context.watch<ShopCardListState>().productList;
 
     return Scaffold(
       appBar: AppBar(
@@ -211,7 +209,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   children: [
                     SubTitleText('Total'),
                     Text(
-                      '24000',
+                      '${Get.parameters['totalPrice']}',
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.6),
                         fontWeight: FontWeight.bold,
@@ -232,30 +230,28 @@ class _CheckOutPageState extends State<CheckOutPage> {
             color: scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Expanded(
-          child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: primaryColor),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Proceed to payment',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(width: 10),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 24.0,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 10),
-                ],
-              )),
-        ),
+        child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: primaryColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Proceed to payment',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 10),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 24.0,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+              ],
+            )),
       ),
     );
   }
